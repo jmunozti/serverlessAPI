@@ -1,5 +1,5 @@
 # NOTE: update this with your service name
-service: serverlessOffline
+service: serverlessBitCoinPrices
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -26,9 +26,17 @@ provider:
   #environment: ${file(env.yml):${self:provider.stage}}
 
 functions:
-  hello:
-    handler: handler.hello
+  prices:
+    handler: handler.prices
+    timeout: 10
     events:
       - http:
-          path: hello
+          path: prices
+          method: get
+  markets:
+    handler: handler.markets
+    timeout: 10
+    events:
+      - http:
+          path: markets
           method: get
